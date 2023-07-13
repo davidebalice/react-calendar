@@ -1,46 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
-const events = [
-  { title: "Meeting", start: new Date() },
-  { title: "event 1", start: "2023-07-04 13:00:00" },
-  { title: "event 2", start: "2023-07-04 12:00:00" },
-];
+import timeGridPlugin from "@fullcalendar/timegrid";
+import Form from "react-bootstrap/Form";
+import moment from "moment";
+import classes from "./Calendar.module.css";
 
 const Calendar = () => {
+  const [events, setEvents] = useState([
+    { title: "Meeting", start: new Date() },
+    { title: "event 1", start: "2023-07-04 13:00:00" },
+    { title: "event 2", start: "2023-07-04 12:00:00" },
+  ]);
+  const [titleValue, setTitleValue] = useState("");
+  const [startValue, setStartValue] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newEvent = {
+      title: titleValue,
+      start: moment(startValue).format("YYYY-MM-DD HH:mm:ss"),
+    };
+    setEvents([...events, newEvent]);
+    setTitleValue("");
+    setStartValue("");
+  };
+
   return (
     <div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Label>Date</Form.Label>
+          <Form.Control
+            type="datetime-local"
+            value={startValue}
+            onChange={(event) => setStartValue(event.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Example textarea</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            value={titleValue}
+            onChange={(event) => setTitleValue(event.target.value)}
+          />
+
+          <button type="submit">Aggiungi</button>
+        </Form.Group>
+      </Form>
+
       <h2>Calendar React</h2>
-      <h5 className="mb-5">This demo use fullcalendar React package</h5>
+      <h5 className="mb-5">
+        This demo use fullcalendar React package, I create a events management
+        with modal window
+      </h5>
 
       <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
+        eventClick={handleEventClick}
         weekends={true}
         headerToolbar={{
           left: "prev,next today",
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
+        eventTimeFormat={{ hour: "2-digit", minute: "2-digit", hour12: false }}
+        eventContent={renderEventContent}
         editable={true}
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
+        timeFormat="H:mm"
+        select={handleDateSelect}
         events={events}
       />
     </div>
   );
 };
+//        eventTimeFormat={{ hour12: false }}
 
 function renderEventContent(eventInfo) {
   return (
     <>
-      <b>{eventInfo.timeText}</b> &nbsp;<i>{eventInfo.event.title}</i>
+      <b className={classes.start}>{eventInfo.timeText}</b> &nbsp;
+      <i className={classes.title}>{eventInfo.event.title}</i>
     </>
   );
 }
+
+const handleDateSelect = (selectInfo) => {
+  let title = prompt("Please enter a new title for your event");
+  let calendarApi = selectInfo.view.calendar;
+
+  calendarApi.unselect(); // clear date selection
+
+  if (title) {
+    /*
+    calendarApi.addEvent({
+      id: createEventId(),
+      title,
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+      allDay: selectInfo.allDay,
+    });*/
+  }
+};
+
+const handleEventClick = (clickInfo) => {
+  console.log(clickInfo.event.title);
+  console.log(clickInfo.event.start);
+  /*
+  if (
+    confirm(
+      `Are you sure you want to delete the event '${clickInfo.event.title}'`
+    )
+  ) {
+    clickInfo.event.remove();
+  }
+*/
+};
+
+const handleEvents = (events) => {
+  this.setState({
+    currentEvents: events,
+  });
+};
 
 export default Calendar;
 
@@ -125,12 +212,7 @@ export default class DemoApp extends React.Component {
         )
       }
     
-      handleWeekendsToggle = () => {
-        this.setState({
-          weekendsVisible: !this.state.weekendsVisible
-        })
-      }
-    
+
       handleDateSelect = (selectInfo) => {
         let title = prompt('Please enter a new title for your event')
         let calendarApi = selectInfo.view.calendar

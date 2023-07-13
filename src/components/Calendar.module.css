@@ -1,0 +1,10 @@
+.title {
+  color: #333 !important;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.start {
+  margin-left: 5px;
+  color: #555;
+}
