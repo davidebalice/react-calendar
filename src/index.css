@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f1f1f1;
 }
 
 code {
@@ -13,6 +14,22 @@ code {
 }
 
 .main-wrapper {
-  padding: 50px;
+  padding: 120px;
+  padding-top: 0px;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .main-wrapper {
+    padding: 20px;
+  }
+}
+
+.fc td {
+  background: #fff;
+}
+
+.fc th {
+  background: #339fcc;
+  color: #fff;
 }

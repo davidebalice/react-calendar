@@ -8,3 +8,15 @@
   margin-left: 5px;
   color: #555;
 }
+
+.buttonModal {
+  background: #29be19 !important;
+  border-color: #29be19 !important;
+  margin-top:20px;
+  margin-bottom:20px
+}
+
+.buttonModal b {
+  color: #fff;
+}
+

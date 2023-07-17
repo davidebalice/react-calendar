@@ -37,7 +37,7 @@
   color: #ec5b53 !important;
   display: inline-block;
   padding: 18px 44px;
-  font-family: "Rufina", serif;
+  font-family: "Rubik", serif;
   font-size: 14px;
   font-weight: 400;
   border: 0;
@@ -111,7 +111,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Rufina", serif;
+  font-family: "Rubik", serif;
   color: #000a2d;
   margin-top: 0px;
   font-style: normal;
@@ -2951,7 +2951,7 @@ hr {
   margin-bottom: 70px;
 }
 .blog_area a {
-  color: "Rufina", serif !important;
+  color: "Rubik", serif !important;
   text-decoration: none;
   transition: 0.4s;
 }
@@ -4096,7 +4096,7 @@ hr {
   color: #fff;
   font-weight: 900;
   margin-bottom: 0;
-  font-family: "Rufina", serif;
+  font-family: "Rubik", serif;
   text-transform: capitalize;
 }
 @media (max-width: 767px) {

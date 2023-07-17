@@ -9,21 +9,29 @@
 }
 
 .logoReactTools {
-  max-width:80px !important;
+  max-width: 80px !important;
   height: auto;
-  margin-left:10px
+  margin-left: 10px;
 }
 
 .logoContainer {
   display: flex;
   align-items: center;
-  padding:21px 0 21px 0;
+  padding: 21px 0 21px 0;
 }
 
-.header{
+.header {
   -webkit-box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.23);
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.23);
   margin-bottom: 30px;
+  background-color: #fff;
 }
 
+.buttonModal {
+  background: #29be19 !important;
+  border-color: #29be19 !important;
+}
 
+.buttonModal b {
+  color: #fff;
+}
