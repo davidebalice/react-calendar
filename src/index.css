@@ -33,3 +33,14 @@ code {
   background: #339fcc;
   color: #fff;
 }
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-event-main-frame {
+  flex-direction: row;
+  text-align: left;
+}
+
+.fc-event-desc,
+.fc-event-title {
+  white-space: break-spaces;
+}

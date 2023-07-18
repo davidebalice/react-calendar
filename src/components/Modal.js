@@ -9,10 +9,13 @@ const ModalWindow = ({
   handleShow,
   handleClose,
   handleSubmit,
+  handleDelete,
   startValue,
   setStartValue,
   titleValue,
   setTitleValue,
+  modalType,
+  setModalType,
 }) => {
   return (
     <>
@@ -26,7 +29,9 @@ const ModalWindow = ({
 
       <Modal show={show} onHide={handleClose} style={{ zIndex: "10000" }}>
         <Modal.Header closeButton>
-          <Modal.Title>Add event</Modal.Title>
+          <Modal.Title>
+            {modalType === "add" ? "Add event" : "Edit event"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -50,8 +55,17 @@ const ModalWindow = ({
                 onChange={(event) => setTitleValue(event.target.value)}
               />{" "}
               <Button type="submit" className={classes.buttonModal}>
-                Add event
+                {modalType === "add" ? "Add event" : "Update event"}
               </Button>
+              {modalType === "edit" && (
+                <Button
+                  type="button"
+                  onClick={() => handleDelete(startValue)}
+                  className={classes.buttonDelete}
+                >
+                  Delete event
+                </Button>
+              )}
             </Form.Group>
           </Form>
         </Modal.Body>

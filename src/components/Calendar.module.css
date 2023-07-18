@@ -12,11 +12,22 @@
 .buttonModal {
   background: #29be19 !important;
   border-color: #29be19 !important;
-  margin-top:20px;
-  margin-bottom:20px
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .buttonModal b {
   color: #fff;
 }
 
+.buttonDelete {
+  background: #ff0000 !important;
+  border-color: #ff0000 !important;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.buttonDelete b {
+  color: #fff;
+}
