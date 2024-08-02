@@ -1,5 +1,5 @@
 .logo {
-  max-width: 180px !important;
+  max-width: 150px !important;
   height: auto;
 }
 
@@ -14,10 +14,32 @@
   margin-left: 10px;
 }
 
+.footer {
+  width: 100%;
+  background-color: #555;
+  text-align: center;
+  padding: 8px 0;
+}
+.footer a {
+  color: white;
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
-  padding: 21px 0 21px 0;
+  gap: 13px;
+  padding: 20px 0 20px 0;
+  justify-content: start;
+}
+
+.github {
+  max-width: 140px !important;
+  height: auto;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .header {
@@ -30,6 +52,9 @@
 .buttonModal {
   background: #29be19 !important;
   border-color: #29be19 !important;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
 }
 
 .buttonModal b {

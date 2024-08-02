@@ -1,17 +1,29 @@
-import React, { useState, useContext, useEffect } from "react";
-import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import moment from "moment";
-import classes from "./Calendar.module.css";
-import Modal from "./Modal";
-import Description from "./Description";
+import React, { useContext, useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import { FaCalendarPlus, FaInfoCircle } from "react-icons/fa";
 import { Context } from "../common/Context";
+import classes from "./Calendar.module.css";
+import { newEvent1, newEvent2, newEvent3, newEvent4 } from "./DemoData";
+import Info from "./Info";
+import Modal from "./Modal";
 
 const Calendar = () => {
-  const { show, setShow, handleShow, modalType, setModalType } =
-    useContext(Context);
+  const {
+    show,
+    setShow,
+    handleShow,
+    modalType,
+    setModalType,
+    info,
+    setInfo,
+    handleInfo,
+  } = useContext(Context);
+
   const [events, setEvents] = useState([]);
   const [titleValue, setTitleValue] = useState("");
   const [startValue, setStartValue] = useState(
@@ -64,7 +76,6 @@ const Calendar = () => {
   };
 
   const handleDelete = (eventDate) => {
-    //const updatedEvents = events.filter((event) => event.start !== date);
     const updatedEvents = events.filter((event) => {
       const eventStartDate = new Date(event.start);
       const targetDate = new Date(eventDate);
@@ -78,44 +89,7 @@ const Calendar = () => {
   };
 
   const addDemoEvent = () => {
-    const currentDate = new Date();
-    const today = new Date(currentDate.getTime());
-    today.setHours(8);
-    today.setMinutes(45);
-    const formattedToday = formatDate(today);
-    const newEvent = {
-      title: "today",
-      start: formattedToday,
-    };
-
-    const nextDay = new Date(currentDate.getTime() + 48 * 60 * 60 * 1000);
-    nextDay.setHours(10);
-    nextDay.setMinutes(30);
-    const formattedNextDay = formatDate(nextDay);
-    const newEvent1 = {
-      title: "aaaaaaaaaaaa",
-      start: formattedNextDay,
-    };
-
-    const previousDay = new Date(currentDate.getTime() - 48 * 60 * 60 * 1000);
-    previousDay.setHours(9);
-    previousDay.setMinutes(0);
-    const formattedPreviousDay = formatDate(previousDay);
-    const newEvent2 = {
-      title: "bbbbbbbbbbbbbb",
-      start: formattedPreviousDay,
-    };
-
-    const anotherDay = new Date(currentDate.getTime() - 64 * 60 * 60 * 1000);
-    anotherDay.setHours(13);
-    anotherDay.setMinutes(0);
-    const formattedAnotherDay = formatDate(anotherDay);
-    const newEvent3 = {
-      title: "ccccccccccccccccc",
-      start: formattedAnotherDay,
-    };
-
-    setEvents([...events, newEvent, newEvent1, newEvent2, newEvent3]);
+    setEvents([...events, newEvent1, newEvent2, newEvent3, newEvent4]);
   };
 
   useEffect(() => {
@@ -156,8 +130,6 @@ const Calendar = () => {
 
   return (
     <div>
-      <Description />
-
       <Modal
         show={show}
         handleClose={handleClose}
@@ -172,6 +144,25 @@ const Calendar = () => {
         setModalType={setModalType}
       />
 
+      <Info show={info} handleClose={setInfo} />
+
+      <div class={classes.buttonContainer}>
+        <Button
+          variant="primary"
+          onClick={handleShow}
+          className={classes.buttonModal}
+        >
+          <FaCalendarPlus /> Add event
+        </Button>
+
+        <Button
+          variant="primary"
+          onClick={handleInfo}
+          className={classes.buttonInfo}
+        >
+          <FaInfoCircle /> Info
+        </Button>
+      </div>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"

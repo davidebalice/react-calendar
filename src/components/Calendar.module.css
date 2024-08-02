@@ -12,6 +12,9 @@
 .buttonModal {
   background: #29be19 !important;
   border-color: #29be19 !important;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -30,4 +33,23 @@
 
 .buttonDelete b {
   color: #fff;
+}
+
+.buttonInfo {
+  background: #339fcc !important;
+  border-color: #339fcc !important;
+  display: flex !important;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.buttonInfo b {
+  color: #fff;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
 }

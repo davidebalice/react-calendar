@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -19,15 +19,12 @@ const ModalWindow = ({
 }) => {
   return (
     <>
-      <Button
-        variant="primary"
-        onClick={handleShow}
-        className={classes.buttonModal}
+      <Modal
+        show={show}
+        onHide={handleClose}
+        style={{ zIndex: "10000" }}
+        centered
       >
-        <b>+</b> Add event
-      </Button>
-
-      <Modal show={show} onHide={handleClose} style={{ zIndex: "10000" }}>
         <Modal.Header closeButton>
           <Modal.Title>
             {modalType === "add" ? "Add event" : "Edit event"}
@@ -53,7 +50,7 @@ const ModalWindow = ({
                 rows={3}
                 value={titleValue}
                 onChange={(event) => setTitleValue(event.target.value)}
-              />{" "}
+              />
               <Button type="submit" className={classes.buttonModal}>
                 {modalType === "add" ? "Add event" : "Update event"}
               </Button>

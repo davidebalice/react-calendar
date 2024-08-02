@@ -5,7 +5,9 @@ export const Context = createContext();
 export function Provider({ children }) {
   const [modalType, setModalType] = useState("add");
   const [show, setShow] = useState(false);
+  const [info, setInfo] = useState(false);
   const handleShow = () => setShow(true);
+  const handleInfo = () => setInfo(true);
 
   return (
     <Context.Provider
@@ -15,6 +17,9 @@ export function Provider({ children }) {
         handleShow,
         modalType,
         setModalType,
+        info,
+        setInfo,
+        handleInfo,
       }}
     >
       {children}
