@@ -1,3 +1,29 @@
+const numberOfEvents = 40;
+const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+const minutes = [0, 10, 15, 20, 30, 40, 45];
+const words = [
+  "lorem",
+  "ipsum",
+  "dolor",
+  "sit",
+  "amet",
+  "consectetur",
+  "adipiscing",
+  "elit",
+  "sed",
+  "do",
+  "eiusmod",
+  "tempor",
+  "incididunt",
+  "ut",
+  "labore",
+  "et",
+  "dolore",
+  "magna",
+  "aliqua",
+  "est",
+];
+
 export const formatDate = (date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -7,39 +33,60 @@ export const formatDate = (date) => {
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
+const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const getRandomFromArray = (array) => {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+};
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function createTitleEvent(words) {
+  const shuffledWords = shuffleArray(words.slice());
+  const numberOfWords = getRandomNumber(7, shuffledWords.length);
+  const sentenceWords = shuffledWords.slice(0, numberOfWords);
+  const sentence = sentenceWords.join(" ");
+
+  return sentence.charAt(0).toUpperCase() + sentence.slice(1) + ".";
+}
+
 const currentDate = new Date();
-const today = new Date(currentDate.getTime());
-today.setHours(8);
-today.setMinutes(45);
-const formattedToday = formatDate(today);
-export const newEvent1 = {
-  title: "today",
-  start: formattedToday,
-};
 
-const nextDay = new Date(currentDate.getTime() + 48 * 60 * 60 * 1000);
-nextDay.setHours(10);
-nextDay.setMinutes(30);
-const formattedNextDay = formatDate(nextDay);
-export const newEvent2 = {
-  title: "aaaaaaaaaaaa",
-  start: formattedNextDay,
-};
+const events = [];
 
-const previousDay = new Date(currentDate.getTime() - 48 * 60 * 60 * 1000);
-previousDay.setHours(9);
-previousDay.setMinutes(0);
-const formattedPreviousDay = formatDate(previousDay);
-export const newEvent3 = {
-  title: "bbbbbbbbbbbbbb",
-  start: formattedPreviousDay,
-};
+for (let i = 1; i <= numberOfEvents; i++) {
+  const randomDay = getRandomNumber(1, 30);
+  const day = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    randomDay
+  );
 
-const anotherDay = new Date(currentDate.getTime() - 64 * 60 * 60 * 1000);
-anotherDay.setHours(13);
-anotherDay.setMinutes(0);
-const formattedAnotherDay = formatDate(anotherDay);
-export const newEvent4 = {
-  title: "ccccccccccccccccc",
-  start: formattedAnotherDay,
-};
+  const randomHour = getRandomFromArray(hours);
+  const randomMinute = getRandomFromArray(minutes);
+
+  day.setHours(randomHour);
+  day.setMinutes(randomMinute);
+
+  const formattedDay = formatDate(day);
+
+  const randomTitle = createTitleEvent(words);
+
+  const event = {
+    title: randomTitle,
+    start: formattedDay,
+  };
+
+  events.push(event);
+}
+
+export const eventList = events;

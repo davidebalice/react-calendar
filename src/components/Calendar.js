@@ -8,7 +8,9 @@ import Button from "react-bootstrap/Button";
 import { FaCalendarPlus, FaInfoCircle } from "react-icons/fa";
 import { Context } from "../common/Context";
 import classes from "./Calendar.module.css";
-import { newEvent1, newEvent2, newEvent3, newEvent4 } from "./DemoData";
+import {
+  eventList,
+} from "./DemoData";
 import Info from "./Info";
 import Modal from "./Modal";
 
@@ -89,7 +91,10 @@ const Calendar = () => {
   };
 
   const addDemoEvent = () => {
-    setEvents([...events, newEvent1, newEvent2, newEvent3, newEvent4]);
+    setEvents([
+      ...events,
+      ...eventList,
+    ]);
   };
 
   useEffect(() => {
@@ -149,7 +154,10 @@ const Calendar = () => {
       <div class={classes.buttonContainer}>
         <Button
           variant="primary"
-          onClick={handleShow}
+          onClick={() => {
+            setModalType("add");
+            handleShow();
+          }}
           className={classes.buttonModal}
         >
           <FaCalendarPlus /> Add event

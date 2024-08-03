@@ -44,3 +44,11 @@ code {
 .fc-event-title {
   white-space: break-spaces;
 }
+
+
+.fc-daygrid-day-top a{
+  background-color: #f1f1f1;
+  width:30px;
+  text-align: center;
+  font-weight: bold;
+}

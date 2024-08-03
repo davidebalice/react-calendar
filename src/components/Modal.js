@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 import classes from "./Calendar.module.css";
 
 const ModalWindow = ({
@@ -44,25 +44,27 @@ const ModalWindow = ({
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Example textarea</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
                 value={titleValue}
                 onChange={(event) => setTitleValue(event.target.value)}
               />
-              <Button type="submit" className={classes.buttonModal}>
-                {modalType === "add" ? "Add event" : "Update event"}
-              </Button>
-              {modalType === "edit" && (
-                <Button
-                  type="button"
-                  onClick={() => handleDelete(startValue)}
-                  className={classes.buttonDelete}
-                >
-                  Delete event
+              <div className={classes.buttonContainer}  style={{justifyContent:'space-between'}}>
+                <Button type="submit" className={classes.buttonModal}>
+                  {modalType === "add" ? "Create" : "Save"}
                 </Button>
-              )}
+                {modalType === "edit" && (
+                  <Button
+                    type="button"
+                    onClick={() => handleDelete(startValue)}
+                    className={classes.buttonDelete}
+                  >
+                    Delete
+                  </Button>
+                )}
+              </div>
             </Form.Group>
           </Form>
         </Modal.Body>
